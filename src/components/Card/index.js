@@ -1,9 +1,17 @@
-function Card() {
+import style from "./Card.module.scss";
+import React from "react";
+
+function Card({ price, title, onFavorite, imageUrl, onPlus }) {
+  const [coun, setCount] = React.useState(false);
+  const onSaveCard = () => {
+    onPlus({ price, title, imageUrl });
+    setCount(!coun);
+  };
   return (
-    <div className="card">
-      <div className="card__picture">
-        <div className="follow">
-          <button>
+    <div className={style.card}>
+      <div className={style.card__picture}>
+        <div className={style.follow}>
+          <button onClick={onFavorite}>
             <svg
               width="22"
               height="19"
@@ -21,24 +29,22 @@ function Card() {
         <img
           width={130}
           height={112}
-          src="./images/snikers/image5.jpg"
+          src={imageUrl}
           alt="df"
         ></img>
-        <p className="text">Мужские Кроссовки Nike Blazer Mid Suede</p>
+        <p className="text">{title}</p>
       </div>
-      <div className="card__cocts costs">
-        <div className="costs__prise">
+      <div className={style.card__cocts}>
+        <div className={style.costs__prise}>
           <span>Цена:</span>
-          <b>12 999 руб.</b>
+          <b> {price} руб.</b>
         </div>
-        <button>
-          <img
-            width={11}
-            height={11}
-            src="./images/icon/plus.svg"
-            alt="re"
-          ></img>
-        </button>
+
+        <img
+          onClick={onSaveCard}
+          src={coun ? "../images/icon/saveOK.svg" : "../images/icon/save.svg"}
+          alt="re"
+        ></img>
       </div>
     </div>
   );

@@ -1,21 +1,23 @@
-function Header() {
+import style from "./header.module.scss";
+
+function Header(props) {
   return (
     <header>
-      <div className="headerLogo logo">
+      <div className={style.headerLogo}>
         <img
           width={40}
           height={40}
           src="./images/logo/logo.svg"
           alt="logo"
         ></img>
-        <div className="logo__text">
-          <h3 className="logo__text-title">React snicers</h3>
-          <p className="logo__text-text">Магазин лучших кроссовок</p>
+        <div className={style.logo_text}>
+          <h3>React snicers</h3>
+          <p>Магазин лучших кроссовок</p>
         </div>
       </div>
-      <div className="heder__list">
+      <div className={style.heder__list}>
         <ul>
-          <li>
+          <li onClick={props.onClickCart}>
             <svg
               width="20"
               height="20"

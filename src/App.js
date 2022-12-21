@@ -1,14 +1,41 @@
 import Card from "./components/Card";
-import Header from "./components/header";
-import Drawer from "./components/drawer";
+import Header from "./components/Header";
+import Drawer from "./components/Drawer";
+import React from "react";
+
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const [count, setCount] = React.useState(false);
+  React.useEffect(() => {
+    fetch("https://63a100f8e3113e5a5c4b4b93.mockapi.io/items")
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+  const onSaveToCard = (obj) => {
+    let tre = cartItems.some(
+      (test) => JSON.stringify(test) === JSON.stringify(obj)
+    );
+    if (!tre) {
+      console.log(tre);
+      setCartItems((prev) => [...prev, obj]);
+    }
+  };
   return (
     <div className="wrapper">
       <div className="wrapper__content">
-        <div className="overlay">
-          <Drawer></Drawer>
-        </div>
-        <Header></Header>
+        {count && (
+          <Drawer
+            items={cartItems}
+            onClose={() => setCount(false)}
+          />
+        )}
+
+        <Header onClickCart={() => setCount(true)}></Header>
         <div className="wrapper__cotol">
           <div className="title__search">
             <h1 className="title">Все кросовки</h1>
@@ -26,7 +53,15 @@ function App() {
             </div>
           </div>
           <div className="wrapper__card">
-            <Card></Card>
+            {items.map((item) => (
+              <Card
+                title={item.title}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                onPlus={(obj) => onSaveToCard(obj)}
+                onFavorite={() => console.log("favorit ")}
+              ></Card>
+            ))}
           </div>
         </div>
       </div>
