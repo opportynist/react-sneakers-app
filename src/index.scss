@@ -38,10 +38,23 @@
     border: 1px solid #f3f3f3;
     border-radius: 10px;
     padding: 10px;
+    position: relative;
     input {
       border: 0;
       padding-left: 10px;
       font-size: 16px;
+    }
+
+    .cearchClear {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
