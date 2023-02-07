@@ -1,0 +1,110 @@
+{
+  "card": [],
+  "favori": [
+    {
+      "id": 3,
+      "price": 123,
+      "title": "Красовки найк мжские 124",
+      "imageUrl": "/images/snikers/image3.jpg"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "price": 123,
+      "title": "Красовки найк мжские 124",
+      "imageUrl": "/images/snikers/image1.jpg"
+    },
+    {
+      "id": 3,
+      "price": 123,
+      "title": "Красовки найк мжские 124",
+      "imageUrl": "/images/snikers/image3.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "items": [
+        {
+          "id": 3,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image3.jpg"
+        },
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "items": [
+        {
+          "id": 3,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image3.jpg"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "price": 123,
+          "title": "Красовки найк мжские 124",
+          "imageUrl": "/images/snikers/image1.jpg"
+        }
+      ],
+      "id": 7
+    }
+  ]
+}

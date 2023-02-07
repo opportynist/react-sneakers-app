@@ -1,13 +1,30 @@
+import React from "react";
+
 import Card from "../components/Card";
 
 function Home({
-  items,
   searchValue,
   setSearchValue,
   onCandgeSearchINput,
   onFavoritToCard,
   onSaveToCard,
+  items,
+  isLoading,
 }) {
+  const rendedrItem = () => {
+    const filtreditems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    return (isLoading ? [...Array(8)] : filtreditems).map((item, index) => (
+      <Card
+        key={index}
+        onPlus={(obj) => onSaveToCard(obj)}
+        onFavorite={(obj) => onFavoritToCard(obj)}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
   return (
     <div className="wrapper__cotol">
       <div className="title__search">
@@ -41,30 +58,7 @@ function Home({
           ></input>
         </div>
       </div>
-      <div className="wrapper__card">
-        {items
-          .filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item, index) => (
-            <Card
-              key={index}
-              onPlus={(obj) => onSaveToCard(obj)}
-              onFavorite={(obj) => onFavoritToCard(obj)}
-              {...item}
-            />
-          ))}
-      </div>
-      {/* 
-        {items
-          .filter((item) => item.title.toLowerCase().includes(searchValue))
-          .map((item, index) => (
-            <Card
-              
-             
-            ></Card>
-          ))}
-      </div> */}
+      <div className="wrapper__card">{rendedrItem()}</div>
     </div>
   );
 }

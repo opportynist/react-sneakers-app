@@ -1,6 +1,35 @@
 import style from "./drawer.module.scss";
+import Info from "../Info";
+import React from "react";
+import AppContext from "../../context";
+import axios from "axios";
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onDelite, items = [] }) {
+  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const [isOrderComplite, setIsOrderComplete] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(`http://localhost:3001/orders`, {
+        items: cartItems,
+      });
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete(`http://localhost:3001/card/${item.id}`);
+        await delay(1000);
+      }
+    } catch (error) {
+      alert("Ошибка при создании заказа :(");
+    }
+    setIsLoading(false);
+  };
   return (
     <div className={style.overlay}>
       <div className={style.drawer}>
@@ -25,7 +54,10 @@ function Drawer({ onClose, onDelite, items = [] }) {
           <>
             <div className={style.drawer__goods}>
               {items.map((obj) => (
-                <div className={style.cartItem}>
+                <div
+                  key={obj.id}
+                  className={style.cartItem}
+                >
                   <div
                     style={{ backgroundImage: `url(${obj.imageUrl})` }}
                     className={style.cartItem__img}
@@ -68,30 +100,30 @@ function Drawer({ onClose, onDelite, items = [] }) {
                   <b>1074 руб.</b>
                 </li>
               </ul>
-              <button>Оформить заказ</button>
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+              >
+                Оформить заказ
+              </button>
             </div>
           </>
         ) : (
-          <div class={style.cartEmpty}>
-            <img
-              width="120px"
-              height="120px"
-              src="./images/empty-cart.jpg"
-              alt="Empty"
+          <>
+            <Info
+              title={isOrderComplite ? "Заказ оформлен" : " Корзина пустая"}
+              description={
+                isOrderComplite
+                  ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                  : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
+              }
+              image={
+                isOrderComplite
+                  ? "./images/complited-order.jpg"
+                  : "./images/empty-cart.jpg"
+              }
             />
-            <h2>Корзина пустая</h2>
-            <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-            <button
-              onClick={onClose}
-              class={style.greenButton}
-            >
-              <img
-                src="./images/arrow.svg"
-                alt="Arrow"
-              />
-              Вернуться назад
-            </button>
-          </div>
+          </>
         )}
       </div>
     </div>

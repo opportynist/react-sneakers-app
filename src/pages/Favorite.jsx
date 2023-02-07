@@ -1,6 +1,9 @@
 import Card from "../components/Card";
+import React from "react";
+import AppContext from "../context";
+function Favorites() {
+  const { favorites, onFavoritToCard } = React.useContext(AppContext);
 
-function Favorites({ items, onFavoritToCard }) {
   return (
     <div className="wrapper__cotol">
       <div className="">
@@ -8,12 +11,11 @@ function Favorites({ items, onFavoritToCard }) {
       </div>
 
       <div className="wrapper__card">
-        {items.map((item, index) => (
+        {favorites.map((item, index) => (
           <Card
             key={index}
             favorited={true}
             onFavoritToCard={onFavoritToCard}
-            onFavorite={(obj) => onFavoritToCard(obj)}
             {...item}
           />
         ))}
